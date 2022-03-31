@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { Empresas } from 'src/app/models/empresas.model';
+import { EmpresasService } from 'src/app/services/empresas.service';
+
+
+@Component({
+  selector: 'app-empresas',
+  templateUrl: './empresas.component.html',
+  styleUrls: ['./empresas.component.scss'],
+  providers: [EmpresasService]
+})
+
+export class EmpresasComponent implements OnInit {
+
+  //EMPRESAS
+  public empresasModelGet: Empresas ;
+
+
+  constructor(private _empresasService: EmpresasService) {
+  }
+
+  ngOnInit(): void {
+    this.getEmpresas();
+
+  }
+
+  getEmpresas (){
+    this._empresasService.ObtenerUsuarios ().subscribe(
+       (response) => {
+         this.empresasModelGet = response.Empresas;
+         console.log(response.Empresas);
+
+       },
+       (error)=>{
+         console.log(<any>error)
+       }
+    )}
+
+/*
+  postEmpresas (){
+     this._empresasService.RegistrarEmpresas(this.empresasModelPost).subscribe(
+         (response)=>{
+            console.log(response);
+            this.getEmpresas()
+         },
+         (error)=>{
+            console.log(<any>error);
+         }
+     )}
+*/
+}
