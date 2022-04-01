@@ -14,9 +14,11 @@ export class EmpresasComponent implements OnInit {
 
   //EMPRESAS
   public empresasModelGet: Empresas ;
+  public empresasModelPost:Empresas ;
 
 
   constructor(private _empresasService: EmpresasService) {
+    this.empresasModelPost = new Empresas('','','','','')
   }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class EmpresasComponent implements OnInit {
        }
     )}
 
-/*
+
   postEmpresas (){
      this._empresasService.RegistrarEmpresas(this.empresasModelPost).subscribe(
          (response)=>{
@@ -47,5 +49,5 @@ export class EmpresasComponent implements OnInit {
             console.log(<any>error);
          }
      )}
-*/
+
 }

@@ -118,7 +118,7 @@
 
 <section class="dark">
 	<div class="container py-4">
-    <a id="botonEntidad" href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#addModal">
+    <a id="botonEntidad" href="#" class="btn btn-light btn-block" data-bs-toggle="modal" data-bs-target="#addModal">
       <h6>
         <i class="bi bi-plus-circle-dotted"></i> Agregar empresa
       </h6>
@@ -137,13 +137,15 @@
 
                                       <div class="form-group">
                                           <label for="nombreEmpresa"> Nombre de la empresa: </label>
-                                          <input type="text" class="form-control" name="nombreEmpresa" id="nombreEmpresa" >
+                                          <input type="text" class="form-control"  id="inputNombre" name="nombre" #nombre="ngModel" 
+                                          [(ngModel)] ="empresasModelPost.nombre" required> 
                                       </div>
 
                                       <div class="form-group">
                                           <label for="tipoEmpresa"> Tipo de empresa: </label>
-
-                                          <input type="text"  style="width:100%" name="tipoEmpresa" list="tipoEmpresa">
+                                          <input  style="width:100%" id="inputTipoEmpresa" name="tipoEmpresa" list="tipoEmpresa" required
+                                          #tipoEmpresa="ngModel"
+                                          [(ngModel)] ="empresasModelPost.tipoEmpresa">
                                             <datalist id="tipoEmpresa">
                                               <option value="Restaurante">
                                               <option value="Ventas de tecnología">
@@ -153,10 +155,21 @@
                                               <option value="Cine">
                                             </datalist>
                                       </div>
+                                      <div class="form-group">
+                                        <label for="nombreEmpresa"> Password de la empresa: </label>
+                                        <input type="password" class="form-control"  id="inputPassword" name="password" #password="ngModel" 
+                                        [(ngModel)] ="empresasModelPost.password" required> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="nombreEmpresa"> Usuario: </label>
+                                      <input type="text" class="form-control"  id="inputUsuario" name="usuario" #usuario="ngModel" 
+                                      [(ngModel)] ="empresasModelPost.usuario" required> 
                                   </div>
+                                  </div>
+                                  
                                   <div class="modal-footer" style="background-color: #222830">
                                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                      <button type="sumbit" class="btn btn-success">Guardar</button>
+                                      <button type="sumbit" class="btn btn-success" (click)="postEmpresas()" data-dismiss="createLabel" >Guardar</button>
                                   </div>
                               </form>
 
