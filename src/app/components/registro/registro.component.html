@@ -27,31 +27,36 @@
           </div>
           <form class="was-validated">
             <div class="mb-3">
-              <label class="form-label" for="usuario">Nombre</label>
-              <input type="text" class="form-control" name="usuario" id="usuario" required>
+              <label for="nombreEmpresa"> Nombre de la empresa: </label>
+              <input type="text" class="form-control" id="inputNombre" name="nombre" #nombre="ngModel"
+                [(ngModel)]="empresasModelPost.nombre" required>
             </div>
             <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label">Descripción empresa</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+              <label for="nombreEmpresa"> Usuario: </label>
+              <input type="text" class="form-control" id="inputUsuario" name="usuario" #usuario="ngModel"
+                [(ngModel)]="empresasModelPost.usuario" required>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="usuario">Correo</label>
-              <input type="email" class="form-control" name="usuario" id="usuario" required>
+              <label for="nombreEmpresa"> Password de la empresa: </label>
+                <input type="password" class="form-control" id="inputPassword" name="password" #password="ngModel"
+                  [(ngModel)]="empresasModelPost.password" required>
+            </div>
+            <div class="form-group">
+              <label for="tipoEmpresa"> Tipo de empresa: </label><br>
+              <select id="tipoEmpresa" style="width:100%; height: 2rem;" name="tipoEmpresa" #tipoEmpresa="ngModel"
+                [(ngModel)]="empresasModelPost.tipoEmpresa">
+                <option value="Restaurante">Restaurante</option>
+                <option value="Ventas de tecnología">Venta de tecnología</option>
+                <option value="Librería">Librería</option>
+                <option value="Deporte">Deporte</option>
+                <option value="Supermercado">Supermercado</option>
+                <option value="Cine">Cine</option>
+              </select>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="clave">Contraseña</label>
-              <input type="password" class="form-control" name="clave" id="clave" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="clave">Confirmar contraseña</label>
-              <input type="password" class="form-control" name="clave" id="clave" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" for="clave">Imagenes</label>
-              <input type="file" class="form-control" name="clave" id="clave" required>
             </div>
             <p class="text-danger"></p>
-            <button type="submit" class="btn btn-outline-primary" routerLink="/registro" routerLinkActive="active">Registrarse</button>
+            <button type="submit" class="btn btn-outline-primary" (click)="postEmpresas()">Registrarse</button>
           </form>
         </div>
       </div>

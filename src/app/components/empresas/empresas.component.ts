@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Empresas } from 'src/app/models/empresas.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { EmpresasService } from 'src/app/services/empresas.service';
 
 
@@ -7,22 +8,30 @@ import { EmpresasService } from 'src/app/services/empresas.service';
   selector: 'app-empresas',
   templateUrl: './empresas.component.html',
   styleUrls: ['./empresas.component.scss'],
-  providers: [EmpresasService]
+  providers: [EmpresasService, UsuarioService ]
 })
 
 export class EmpresasComponent implements OnInit {
+  public token;
+
+  public coloresDinamicos = ['red','blue','green','yellow','orange']
+  public random = Math.floor(Math.random()*this.coloresDinamicos.length)
+
+
 
   //EMPRESAS
   public empresasModelGet: Empresas ;
   public empresasModelPost:Empresas ;
 
 
-  constructor(private _empresasService: EmpresasService) {
+  constructor(private _empresasService: EmpresasService, private _usuarioService: UsuarioService) {
     this.empresasModelPost = new Empresas('','','','','')
+    this.token = this._usuarioService.obtenerToken();  
   }
-
   ngOnInit(): void {
     this.getEmpresas();
+    
+    console.log(this.coloresDinamicos[this.random])
 
   }
 
@@ -40,7 +49,7 @@ export class EmpresasComponent implements OnInit {
 
 
   postEmpresas (){
-     this._empresasService.RegistrarEmpresas(this.empresasModelPost).subscribe(
+     this._empresasService.RegistrarEmpresas(this.empresasModelPost, this.token = this._usuarioService.obtenerToken()).subscribe(
          (response)=>{
             console.log(response);
             this.getEmpresas()
@@ -49,5 +58,18 @@ export class EmpresasComponent implements OnInit {
             console.log(<any>error);
          }
      )}
+
+     deleteEmpresa(idEmpresa) {
+      this._empresasService.EliminarUsuarios(idEmpresa,  this.token = this._usuarioService.obtenerToken()).subscribe(
+        (response)=>{
+          console.log(response);
+          this.getEmpresas();
+        },
+        (error)=>{
+          console.log(<any>error);
+  
+        }
+      )
+    }
 
 }
